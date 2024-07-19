@@ -128,7 +128,7 @@ def populate_jinja_args(args):
 def get_images_local_host_path(args):
     """
     Get the localhost paths based on the Package objects from the
-    TKR metadata that will be used for by imgpkg to upload the
+    TKR metadata that will be used for by imgpkg to upload the 
     thick tar files to local docker registry during the image build.
     """
     packages_folder = os.path.join(args.tkr_metadata_folder, "packages")
@@ -151,10 +151,11 @@ def get_images_local_host_path(args):
                     kapp_key_name = key_name + '_localhost_path'
     with open(kapp_file, 'r') as fp:
         for line in fp:
-            if "- image:" in line:
+            if "image: localhost:5000/tkg/packages/kapp-controller" in line:
                 path = ':'.join(line.strip().split('@')[0].split(':')[1:]).strip()
                 localhost_paths[kapp_key_name] = path
                 print(line)
+    print("localhost_paths: ", localhost_paths)
     return localhost_paths
 
 
