@@ -1,7 +1,7 @@
 # Copyright 2023 VMware, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-FROM photon:4.0
+FROM photon:5.0
 
 ARG IMAGE_BUILDER_COMMIT_ID=""
 ARG ANSIBLE_VERSION=2.15.10
@@ -18,7 +18,7 @@ RUN tdnf -y upgrade
 RUN for package in unzip git wget build-essential python3-pip jq coreutils openssh-server; do tdnf -y install "$package"; done
 
 # Install Semver
-RUN pip3 install semver jinja2
+RUN pip3 install semver jinja2 jinja2-time
 
 # Install ovftool
 # TODO: this URL might change or expire so need to look at better way to install it on the container.
